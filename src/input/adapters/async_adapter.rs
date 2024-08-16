@@ -19,6 +19,7 @@ use std::{
         Arc,
     },
 };
+use ringbuf::storage::Heap;
 use symphonia_core::io::MediaSource;
 use tokio::{
     io::{AsyncRead, AsyncReadExt, AsyncSeek, AsyncSeekExt},
@@ -156,7 +157,7 @@ impl AsyncAdapterStream {
     /// between the async and sync halves.
     #[must_use]
     pub fn new(stream: Box<dyn AsyncMediaSource>, buf_len: usize) -> AsyncAdapterStream {
-        let (bytes_in, bytes_out) = SharedRb::new(buf_len).split();
+        let (bytes_in, bytes_out) = SharedRb::<Heap<_>>::new(buf_len).split();
         let bytes_out = bytes_out.into();
         let (resp_tx, resp_rx) = flume::unbounded();
         let (req_tx, req_rx) = flume::unbounded();
