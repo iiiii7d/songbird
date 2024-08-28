@@ -19,7 +19,6 @@ use std::{
         Arc,
     },
 };
-use ringbuf::storage::Heap;
 use symphonia_core::io::MediaSource;
 use tokio::{
     io::{AsyncRead, AsyncReadExt, AsyncSeek, AsyncSeekExt},
