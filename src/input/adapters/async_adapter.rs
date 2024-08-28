@@ -3,7 +3,7 @@ use async_trait::async_trait;
 use flume::{Receiver, RecvError, Sender, TryRecvError};
 use futures::{future::Either, stream::FuturesUnordered, FutureExt, StreamExt};
 use parking_lot::Mutex;
-use ringbuf::{traits::*, *};
+use ringbuf::{storage::Heap, traits::*, *};
 use std::{
     io::{
         Error as IoError,
